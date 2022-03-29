@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title>GOAT Talk</title>
+</head>
+<body>
+  <h1>Artists</h1>
+  <ul>
+    <% artists.forEach(function(t) { %>
+      <li>
+        <form action="/artists/<%= t.id %>?_method=DELETE"
+          id="delete-form" method="POST">
+          <button type="submit">X</button>
+        </form>
+        <a href="/artists/<%= t.id %>"><%= t.artist %></a>
+      </li>
+    <% }); %>
+  </ul>
+  <a href="/artists/new">Add a GOAT</a>
+</body>
+</html>
