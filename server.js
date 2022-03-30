@@ -1,3 +1,5 @@
+require('./config/passport');
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -17,9 +19,24 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(methodOverride('_method'));
+app.use(cookieParser());
+app.use(methodOverride('_method'));
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Add this middleware BELOW passport middleware
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/artists', artistsRouter);

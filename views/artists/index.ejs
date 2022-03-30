@@ -9,17 +9,6 @@
 </head>
 <body>
   <h1>Artists</h1>
-  <ul>
-    <% artists.forEach(function(t) { %>
-      <li>
-        <form action="/artists/<%= t.id %>?_method=DELETE"
-          id="delete-form" method="POST">
-          <button type="submit">X</button>
-        </form>
-        <a href="/artists/<%= t.id %>"><%= t.artist %></a>
-      </li>
-    <% }); %>
-  </ul>
-  <a href="/artists/new">Add a GOAT</a>
+
 </body>
 </html>

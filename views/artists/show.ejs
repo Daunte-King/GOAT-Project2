@@ -6,9 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <title>GOAT Talk</title>
+
 </head>
 <body>
-  <h1>Artist #<%= artistNum %></h1>
-  <h3><%= artist.artist %></h3>
+  <h1>GOAT Landscape</h1>
+  <section id="show-page">
+      <div>Artist:</div>
+      <div><%=Artist.artist %></div>
+      <div>Decade:</div>
+      <div><%= Artist.decade %></div>
+      <div>Genre:</div>
+      <div><%= Artist.genre %></div>
+  </section>
 </body>
 </html>

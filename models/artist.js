@@ -1,32 +1,19 @@
-const artists = [];
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-module.exports = {
-    getAll,
-    getOne,
-    create,
-    deleteOne
-}
+const artistSchema = new Schema({
+    artist: {
+        type: String,
+        required: true
+    },
+    decade: {
+        type: Number,
+        choice: 90,
+        choice: 2000,
+        choice: 2010,
+        choice: 2020,
+        required: true
+    }
+})
 
-function deleteOne(id) {
-    // Find the index based on the id of the todo object
-    const idx = artists.findIndex(artist => artist.id === parseInt(id));
-    artists.splice(idx, 1);
-  }
-
-
-function create(artist) {
-  // Add the id
-  artist.id = Date.now() % 1000000;
-  // New todos wouldn't be done :)
-  artist.done = false;
-  artists.push(artist);
-}
-
-function getOne(id) {
-    // Use the Array.prototype.find iterator method
-    return artists.find(artist => artist.id === parseInt(id));
-  }
-
-  function getAll() {
-    return artists;
-  }
+module.exports = mongoose.model('Artist', artistSchema)

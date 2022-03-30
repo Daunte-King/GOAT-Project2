@@ -1,17 +1,14 @@
 var express = require('express');
 var router = express.Router();
-const artistsCtrl = require('../controllers/artists');
-
-router.get('/', artistsCtrl.index);
-router.get('/new', artistsCtrl.new);
-router.get('/:id', artistsCtrl.show);
-router.post('/', artistsCtrl.create);
-router.delete('/:id', artistsCtrl.delete);
+const artistsCtrl = require('../controllers/artists')
+const isLoggedIn = require('../config/auth');
 
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+
+
+router.get('/', artistsCtrl.index)
+router.get('/new', artistsCtrl.new)
+router.get('/:id', artistsCtrl.show)
+router.get('/', artistsCtrl.create)
 
 module.exports = router;
