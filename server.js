@@ -8,7 +8,7 @@ var passport = require('passport');
 const methodOverride = require('method-override')
 require('dotenv').config();
 require('./config/database');
-// require('./config/passport');
+require('./config/passport');
 
 
 var indexRouter = require('./routes/index');
@@ -19,6 +19,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,9 +33,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // Add this middleware BELOW passport middleware
 app.use(function (req, res, next) {

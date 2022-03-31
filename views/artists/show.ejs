@@ -9,14 +9,21 @@
 
 </head>
 <body>
-  <h1>GOAT Landscape</h1>
-  <section id="show-page">
-      <div>Artist:</div>
-      <div><%=Artist.artist %></div>
-      <div>Decade:</div>
-      <div><%= Artist.decade %></div>
-      <div>Genre:</div>
-      <div><%= Artist.genre %></div>
-  </section>
+    <nav>
+        <a href="/artists/new"></a>ADD artist</a>
+        <a href="/artists">All artists</a>
+    </nav>
+    <main>
+        <section id="show-page">
+            <div> Artist: </div>
+            <div><%= artist.artist %> </div>
+            <div> Decade: </div>
+            <div><%= artist.decade %></div>
+            <div>Genre</div>
+            <div><%= artist.genre %> </div>
+            
+    </main>
+
+
 </body>
 </html>

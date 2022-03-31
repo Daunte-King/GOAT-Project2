@@ -8,10 +8,18 @@
   <title>GOAT Talk</title>
 </head>
 <body>
-  <h1>New Artist</h1>
-  <form action="/artists" method="POST" autocomplete="off">
-    <input type="text" name="artist">
-    <button type="submit">Save Artist</button>
+  <h1>Add Artist</h1>
+  <form id="new-artist" action ="/artists" method="POST">
+      <label>Artist:
+          <input type ="text" name="artist">
+      </label><br>
+      <label>Decade:
+          <input type="text" name="decade">
+      </label><br>
+      <label>Genre:
+          <input type="text" name ="genre">
+      </label><br>
+      <input type="submit" value="Add Artist">
   </form>
 </body>
 </html>

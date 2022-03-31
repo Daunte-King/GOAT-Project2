@@ -38,7 +38,7 @@ module.exports = {
   }
 
   function deleteArtist(req, res) {
-    artist.findByIdAndRemove (req.params.id, function(err, artist){
+    Artist.findByIdAndRemove (req.params.id, function(err, artist){
         res.redirect('/artists')
     })
 }

@@ -3,19 +3,15 @@ const Schema = mongoose.Schema;
 
 const artistSchema = new Schema({
     artist: {
-        type: String,
+        type: "String",
         required: true
     },
     decade: {
-        type: Number,
-        choice: 90,
-        choice: 2000,
-        choice: 2010,
-        choice: 2020,
+        type: "String",
         required: true
     },
     genre: {
-        type: String
+        type: "String"
     },
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     userName: String,

@@ -1,5 +1,5 @@
 require('./config/database')
-const Artist = require('./models/movie');
+const Artist = require('./models/artist');
 
 
 let a;
