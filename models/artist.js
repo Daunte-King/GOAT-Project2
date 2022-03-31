@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const artistSchema = new Schema({
     artist: {
@@ -13,7 +13,13 @@ const artistSchema = new Schema({
         choice: 2010,
         choice: 2020,
         required: true
-    }
+    },
+    genre: {
+        type: String
+    },
+    user: {type: Schema.Types.ObjectId, ref: 'User'},
+    userName: String,
+    userAvatar: String,
 })
 
 module.exports = mongoose.model('Artist', artistSchema)

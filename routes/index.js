@@ -1,32 +1,30 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const passport = require('passport');
 
 
 router.get('/', function(req, res, next) {
-  res.redirect('/artists');
+  res.render('index', { title: 'GOAT' });
 });
 
-// Google OAuth login route
-router.get('/auth/google', passport.authenticate(
-  'google',
-  { scope: ['profile', 'email'] }
-));
+// router.get('/auth/google', passport.authenticate(
+//   'google',
+//   {
+//     successRedirect : '/songs',
+//     failureRedirect : '/songs',
+//     scope: ['profile', 'email'],
+//   }
+// ));
+// router.get('/oauth2callback', passport.authenticate(
+//   'google',
+//   {
+//     successRedirect : '/songs',
+//     failureRedirect : '/songs'
+//   }
+// ));
+// router.get('/logout', function (req, res) {
+//   req.logout();
+//   res.redirect('/songs');
+// });
 
-// Google OAuth callback route
-router.get('/oauth2callback', passport.authenticate(
-  'google',
-  {
-    successRedirect : '/movies',
-    failureRedirect : '/movies'
-  }
-));
-
-// OAuth logout route
-router.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/movies');
-});
-
-module.exports = router;
-
+ module.exports = router;
