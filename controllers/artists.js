@@ -29,11 +29,14 @@ module.exports = {
   }
 
   function create(req, res) {
+    for (let key in req.body) {
+        if (req.body[key] === '') delete req.body[key];
+      }
     const artist = new Artist(req.body);
     artist.save(function(err){
-        if (err) return res.render('artists/new');
+        if (err) return res.render('/artists/new');
         console.log(artist);
-        res.redirect('/artists/new');
+        res.redirect('/artists/${artist._id}');
     })
   }
 

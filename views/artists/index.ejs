@@ -29,15 +29,14 @@
       </thead>
       <tbody>
           <!-- Write the line of EJS to iterate over movies using forEach -->
-          <% artists.forEach(function(a) { %>
+
               <tr>
-                  <td><%= a.artist %></td>
-                  <td><%= a.decade %></td>
-                  <td><%= a.genre %></td>
-                  <td><a href="/artists/<%= a._id %>">DETAILS</a></td>
+                  <td><%= artist.name %></td>
+                  <td><%= artist.decade %></td>
+                  <td><%= artist.genre %></td>
               </tr>
               <!-- Close the forEach using EJS here -->
-              <% }) %>
+
           </tbody>
       </table>
 </body>
