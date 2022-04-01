@@ -10,18 +10,53 @@
 </head>
 <body>
     <nav>
+        <a href="/">HOME</a>
         <a href="/artists/new"></a>ADD artist</a>
-        <a href="/artists">All artists</a>
+        <a href="/artists/show">All artists</a>
     </nav>
     <main>
         <section id="show-page">
             <div> Artist: </div>
-            <div><%= artist.artist %> </div>
+            <div><%= artist.name %> </div>
             <div> Decade: </div>
             <div><%= artist.decade %></div>
             <div>Genre</div>
             <div><%= artist.genre %> </div>
-            
+            </section>
+
+            <% if (user) { %>
+                <form action="/artists/<%=artist._id %>/comments" method="POST">
+                    <textarea name="content"></textarea>
+                    <label>Rating</label>
+                    <select name="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5" selected>5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select><br>
+                    <input type="submit" value="Chat">
+                </form>
+            <% } %>
+            <br>
+                <% artist.comments.forEach(function(c) { %>
+                    <div id="comments">
+                        <h3> <img class="avatar" alt="avatar" src="<%= c.userAvatar %>" width="15px" height="15px"> <%= c.userName %> </h3>
+                        <h4> <%=c.content%> </h4>
+                        <p> Rating: <%=c.rating%> </p>
+                        <% if (user && user._id.equals(c.user)) { %>
+                        <form action="/comments/<%= c._id %>?_method=DELETE" method="POST">
+                            <button type="submit">X</button>
+                        </form>
+                        <% } %>
+                    </div>
+                <% }) %>
+        </body>
     </main>
 
 

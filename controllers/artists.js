@@ -1,75 +1,66 @@
+var path = require('path');
 const Artist = require('../models/artist')
 
-
-module.exports = {
+module.exports ={
     index,
     show,
     new: newArtist,
     create,
-    delete: deleteArtist,
     edit,
     update
-  };
+}
 
-  function index(req, res) {
+function index(req, res) {
     Artist.find({}, function(err, artists) {
-      res.render('artists/index', { title: 'All Artists', artists });
-    });
-  }
-
-  function show(req, res) {
-    Artist.findById(req.params.id, function(err, artist){
-        res.render('artists/show', { title: 'Artist Details', artist});
-    })
-
-  }
-
-  function newArtist(req, res) {
-    res.render('artists/new', { title: 'Add Artist' });
-  }
-
-  function create(req, res) {
-    for (let key in req.body) {
-        if (req.body[key] === '') delete req.body[key];
-      }
-    const artist = new Artist(req.body);
-    artist.save(function(err){
-        if (err) return res.render('/artists/new');
-        console.log(artist);
-        res.redirect('/artists/${artist._id}');
-    })
-  }
-
-  function deleteArtist(req, res) {
-    Artist.findByIdAndRemove (req.params.id, function(err, artist){
-        res.redirect('/artists')
+        res.render('artists/index', {artists})
     })
 }
 
-async function edit(req, res){
-    console.log('edit')
-    const artist1 = await Artist.findById(req.params.id)
-    console.log(artist1);
-    res.render('artists/edit', {
-        artist: artist1
-    });
+function show(req, res) {
+    Artist.findById(req.params.id, function(err, Artist) {
+        res.render('artists/show', {title: `${Artist.name}`, Artist})
+    })
 }
 
-function update(req,res) {
-    console.log('hitting');
-    Artist.findOneAndUpdate(
-      {_id: req.params.id},
-      // update object with updated properties
-      req.body,
-      // options object with new: true to make sure updated doc is returned
-      {new: true},
-      function(err, artist) {
-          console.log('try')
+function newArtist(req, res) {
+    res.render('artists/new', {title: 'Add Artist'})
+}
+
+
+// function create(req, res){
+//     const artist = new Artist(req.body);
+//     artist.save(function(err){
+//         if(err) return res.redirect("artists/new");
+//         res.redirect('/artists/${artist._id}');
+//     })
+// }
+
+function edit(req, res) {
+    const artist = {id: req.params.id}
+    res.render('artists/edit', {artist})
+}
+
+function update(req, res) {
+    Artist.findOneAndUpdate({_id: req.params.id}, req.body, {new: true} , function(err, artist) {
         if (err)
-        {console.log('error')
-        return res.redirect('/artists')};
-        console.log(artist)
-        res.redirect(`${artist._id}`);
-      }
-    );
-  }
+        return res.redirect ('/artists/show')
+        res.redirect(`/artists/show${artist._id}`)
+    });
+}
+
+function create(req, res) {
+    var obj = {
+       name: req.body.name,
+       decade: req.body.decade,
+       genre: req.body.genre
+     }
+        Artist.create(obj, (err, artists) => {
+        if (err) {
+            return res.redirect('/artists/new')
+        }
+        else {
+             artists.save();
+            res.redirect(`/artists/show`);
+        }
+    });
+}

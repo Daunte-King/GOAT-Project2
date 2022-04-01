@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
+var bodyParser = require('body-parser')
+
 var $ = require('jquery');
 const methodOverride = require('method-override')
 require('dotenv').config();
@@ -14,6 +16,7 @@ require('./config/passport');
 
 var indexRouter = require('./routes/index');
 var artistsRouter = require('./routes/artists');
+const user = require('./models/user');
 
 var app = express();
 
@@ -28,6 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
+
 
 app.use(session({
   secret: process.env.SECRET,
@@ -62,5 +66,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.post('/artists', (req, res) => {
+  var myData = new user(req.body)
+})
 
 module.exports = app;
