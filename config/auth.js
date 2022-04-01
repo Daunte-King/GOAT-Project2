@@ -1,5 +1,4 @@
-const req = require("express/lib/request");
-const res = require("express/lib/response");
+
 
 // Middleware for routes that require a logged in user
 module.exports = function isLoggedIn(req, res, next) {

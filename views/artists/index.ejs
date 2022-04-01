@@ -23,17 +23,35 @@
   <h1>Artists</h1>
   <table>
     <thead>
-      <section id="show-page">
-        <div> Artist: </div>
-        <div><%= artists.name %> </div>
-        <div> Decade: </div>
-        <div><%= artists.decade %></div>
-        <div>Genre:</div>
-        <div><%= artists.genre %> </div>
-        </section>
-      </thead>
+      <tr>
+        <th>Name</th>
+        <th>Decade</th>
+        <th>Genre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Write the line of EJS to iterate over movies using forEach -->
+      <% artists.forEach(function(a){ %>
+        <tr>
+          <td><%= a.name %></td>
+          <td><%= a.decade%></td>
+          <td><%= a.genre %></td>
+
+            <td>
+              <form action="/artists/<%= a.id %>?_method=DELETE"
+                class="delete-form" method="POST">
+                <button type="submit">X</button>
+              </form>
+              </td>
+
+              <td>
+                <form action="/comments/<%= a.id %>?_method="
+              </td>
 
 
-      </table>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
 </body>
 </html>

@@ -8,16 +8,17 @@ router.get('/', artistsCtrl.index);
 
 router.get('/new', isLoggedIn, artistsCtrl.new);
 
+router.delete('/:id', isLoggedIn, artistsCtrl.delete)
+
 router.post('/', isLoggedIn, artistsCtrl.create)
 
-
 router.get('/:id', artistsCtrl.show);
-
 
 router.get('/:id/edit', isLoggedIn, artistsCtrl.edit);
 
 router.put('/:id', artistsCtrl.update);
 
-//router.delete('/:id', isLoggedIn, artistsCtrl.delete);
+
+
 
 module.exports = router;

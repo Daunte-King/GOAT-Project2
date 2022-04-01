@@ -5,7 +5,7 @@ const isLoggedIn = require('../config/auth');
 
 
 router.post('/artists/:id/comments', isLoggedIn, commentsCtrl.create)
-router.delete('/comments/:id', isLoggedIn, commentsCtrl.delete)
+// router.delete('/comments/:id', isLoggedIn, commentsCtrl.delete)
 
 
 module.exports = router;
