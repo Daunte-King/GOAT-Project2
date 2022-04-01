@@ -72,4 +72,10 @@ app.post('/artists', (req, res) => {
   var myData = new user(req.body)
 })
 
+app.get('/artists', function(req, res){
+  res.render('artists', {
+    artists: artist
+  });
+});
+
 module.exports = app;

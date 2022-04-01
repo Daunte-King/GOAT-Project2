@@ -4,5 +4,28 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: black;
+  -moz-text-decoration-style: wavy;
+  background-color: white;
+  background-size: cover;
+  border: 3px solid gold;
+}
+
+nav {
+  background-color: white;
+  background-size: cover;
+  border: 3px solid gold;
+  font: black;
+}
+
+.index {
+  text-align: center;
+  background-size: cover;
+  background-color: gold;
+}
+
+.goat-pic {
+  height: 350px;
+  width: 650px;
+
 }

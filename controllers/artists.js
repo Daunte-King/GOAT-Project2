@@ -24,7 +24,7 @@ function show(req, res) {
 }
 
 function newArtist(req, res) {
-    res.render('artists/index', {title: 'Add Artist'})
+    res.render('artists/new', {title: 'Add Artist'})
 }
 
 
