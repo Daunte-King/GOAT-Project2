@@ -27,13 +27,13 @@ function newArtist(req, res) {
 }
 
 
-// function create(req, res){
-//     const artist = new Artist(req.body);
-//     artist.save(function(err){
-//         if(err) return res.redirect("artists/new");
-//         res.redirect('/artists/${artist._id}');
-//     })
-// }
+function create(req, res){
+    const artist = new Artist(req.body);
+    artist.save(function(err){
+        if(err) return res.redirect("artists/new");
+        res.redirect('/artists/${artist._id}');
+    })
+}
 
 function edit(req, res) {
     const artist = {id: req.params.id}
@@ -48,19 +48,19 @@ function update(req, res) {
     });
 }
 
-function create(req, res) {
-    var obj = {
-       name: req.body.name,
-       decade: req.body.decade,
-       genre: req.body.genre
-     }
-        Artist.create(obj, (err, artists) => {
-        if (err) {
-            return res.redirect('/artists/new')
-        }
-        else {
-             artists.save();
-            res.redirect(`/artists/show`);
-        }
-    });
-}
+// function create(req, res) {
+//     var obj = {
+//        name: req.body.name,
+//        decade: req.body.decade,
+//        genre: req.body.genre
+//      }
+//         Artist.create(obj, (err, artists) => {
+//         if (err) {
+//             return res.redirect('/artists/new')
+//         }
+//         else {
+//              artists.save();
+//             res.redirect(`/artists/show`);
+//         }
+//     });
+// }
