@@ -31,7 +31,6 @@
             <div><%= artist.genre %></div>
 
           <br><br>
-          <h2>Comments</h2>
           <% if (user) { %>
             <form id="add-comment-form" method="POST" action="/artists/<%= artist._id %>/comments">
               <label>Comment:</label>
@@ -39,14 +38,13 @@
               <input type="submit" value="Add Comment">
             </form>
           <% } %>
+         
 
           <% if (artist.comments.length) { %>
             <table>
               <thead>
                 <tr>
-                  <th>User</th>
-                  <th>Date</th>
-                  <th>Comment</th>
+                  <th>What people are saying:</th>
                   <th></th>
                 </tr>
               </thead>
@@ -54,13 +52,11 @@
                 <% artist.comments.forEach(function(c) { %>
                   <tr>
                     <td class="review-user"><img src="<%= c.userAvatar %>"><%= c.userName %></td>
-                    <td><%= c.createdAt.toLocaleDateString() %></td>
                     <td><%= c.content %></td>
                   </tr>
                 <% }); %>
                 <tr>
                   <td colspan="3"></td>
-                  <td><strong><%= (total / artist.comments.length).toFixed(1) %></strong></td>
                 </tr>
               </tbody>
             </table>

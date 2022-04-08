@@ -3,10 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const commentSchema = new Schema({
-    content: { type: String, required: true },
-    user: { type: Schema.Types.ObjectId, ref: 'User'},
-  }, {
-    timestamps: true
+    content: { type: String, required: true }
   });
 
 const artistSchema = new Schema({
@@ -22,7 +19,7 @@ const artistSchema = new Schema({
         type: String,
         required: true
     },
-     comments: [commentSchema],
+    comments:[commentSchema],
 
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     userName: String,
