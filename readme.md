@@ -3,10 +3,9 @@ GOAT - An app where music enthusiasts can declare who they believe to be the "Gr
 
 
 ☐ Technologies Used: 
--html
--css
--js
--express
+-Javascript
+-CSS
+-EJS
 
 
 
