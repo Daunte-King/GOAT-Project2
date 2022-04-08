@@ -1,0 +1,25 @@
+<nav>
+    <ul>
+      <% if (user) { %>
+        <li> <a href="/">Home</a> </li>
+        <li> <a href="/artists">All artists</a> </li>
+        <li> <a href="/artists/new" >ADD Artist</a> </li>
+        <li> <a href="/logout">LOG OUT</a> </li>
+      <% } else { %>
+        <li> <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a> </li>
+      <% } %>
+  </nav>
+
+<h1>Edit Artist</h1>
+<form id="edit-artist" action="/artists/<%= artist._id %>?_method=PUT" method="POST">
+    <label>Name:
+        <input type="text" name="name">
+    </label><br>
+    <label>Decade:
+        <input type="text" name="decade">
+    </label><br>
+    <label>Genre:
+        <input type="text" name="genre">
+    </label><br>
+    <input type="submit" value="Edit">
+    </form>

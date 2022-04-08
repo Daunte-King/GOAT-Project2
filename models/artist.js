@@ -2,6 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
+const commentSchema = new Schema({
+    content: { type: String, required: true },
+    user: { type: Schema.Types.ObjectId, ref: 'User'},
+  }, {
+    timestamps: true
+  });
+
 const artistSchema = new Schema({
     name: {
         type: String,
@@ -15,6 +22,7 @@ const artistSchema = new Schema({
         type: String,
         required: true
     },
+     comments: [commentSchema],
 
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     userName: String,
@@ -24,4 +32,3 @@ const artistSchema = new Schema({
 
 
 module.exports = mongoose.model('Artist', artistSchema);
-

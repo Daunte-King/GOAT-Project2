@@ -8,23 +8,19 @@
 
 </head>
 <body>
-    <nav>
-
-
-    <% if (user) { %>
-        <a href="/">Home</a>
-        <a href="/artists/show">All artists</a>
-      <a href="/artists" >ADD Artist</a>
-      <a href="/logout">LOG OUT</a>
-    <% } else { %>
-        <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-    <% } %>
-
+  <nav>
+    <ul>
+      <% if (user) { %>
+        <li> <a href="/">Home</a> </li>
+        <li> <a href="/artists">All artists</a> </li>
+        <li> <a href="/artists/new" >ADD Artist</a> </li>
+        <li> <a href="/logout">LOG OUT</a> </li>
+      <% } else { %>
+        <li> <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a> </li>
+      <% } %>
   </nav>
-<script>
+</ul>
 
-
-</script>
 
   <h1>Artists</h1>
   <table>
@@ -35,6 +31,34 @@
         <th>Genre</th>
       </tr>
     </thead>
+    <tbody>
+      <!-- Write the line of EJS to iterate over movies using forEach -->
+      <% artists.forEach(function(a) { %>
+          <tr>
+              <td><%= a.name %></td>
+              <td><%= a.decade %></td>
+              <td><%= a.genre %></td>
+              <td><%= a.comments %></td>
+              <!-- <td><a href="/artists/<%= a._id %>">DETAILS</a></td> -->
+              <td>
+                <button>
+                <a href="/artists/<%= a.id %>/edit" id="edit">Edit Artist</a>
+              </button>
+              </td>
+              <td>
+                <a href="/artists/<%= a.id/show %>?_method=GET" >Add Comment</a>
+              </td>
+              <td>
+                <form action="/artists/<%= a.id %>?_method=DELETE"
+                  class="delete-form" method="POST">
+                  <button type="submit">Delete</button>
+                </form>
+              </td>
+          </tr>
+          <!-- Close the forEach using EJS here -->
+          <% }) %>
+      </tbody>
+      </table>
 
 </body>
 </html>

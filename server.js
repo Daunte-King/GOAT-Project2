@@ -5,10 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
-var bodyParser = require('body-parser')
-
-var $ = require('jquery');
 const methodOverride = require('method-override')
+
 require('dotenv').config();
 require('./config/database');
 require('./config/passport');
@@ -16,7 +14,6 @@ require('./config/passport');
 
 var indexRouter = require('./routes/index');
 var artistsRouter = require('./routes/artists');
-const user = require('./models/user');
 const commentsRouter = require('./routes/comments');
 
 var app = express();
@@ -29,7 +26,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
 
@@ -51,6 +48,7 @@ app.use(function (req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/artists', artistsRouter);
+app.use('/', commentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -68,14 +66,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.post('/artists', (req, res) => {
-  var myData = new user(req.body)
-})
+// app.post('/artists', (req, res) => {
+//   var myData = new user(req.body)
+// })
 
-app.get('/artists', function(req, res){
-  res.render('artists', {
-    artists: artist
-  });
-});
+// app.get('/artists', function(req, res){
+//   res.render('artists', {
+//     artists: artist
+//   });
+// });
 
 module.exports = app;

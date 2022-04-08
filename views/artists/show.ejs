@@ -10,53 +10,65 @@
 </head>
 <body>
     <nav>
-        <a href="/">HOME</a>
-        <a href="/artists/new"></a>ADD artist</a>
-        <a href="/artists/show">All artists</a>
-    </nav>
+        <ul>
+          <% if (user) { %>
+            <li> <a href="/">Home</a> </li>
+            <li> <a href="/artists">All Artists</a> </li>
+            <li> <a href="/artists/new" >ADD Artist</a> </li>
+            <li> <a href="/logout">LOG OUT</a> </li>
+          <% } else { %>
+            <li> <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a> </li>
+          <% } %>
+      </nav>
+    </ul>
     <main>
         <section id="show-page">
-            <div> Artist: </div>
-            <div><%= artist.name %> </div>
-            <div> Decade: </div>
+            <div>Artist: </div>
+            <div><%= artist.name %></div>
+            <div>Decade: </div>
             <div><%= artist.decade %></div>
-            <div>Genre</div>
-            <div><%= artist.genre %> </div>
-            </section>
+            <div>Genre: </div>
+            <div><%= artist.genre %></div>
 
-            <% if (user) { %>
-                <form action="/artists/<%=artist._id %>/comments" method="POST">
-                    <textarea name="content"></textarea>
-                    <label>Rating</label>
-                    <select name="rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select><br>
-                    <input type="submit" value="Chat">
-                </form>
-            <% } %>
-            <br>
+          <br><br>
+          <h2>Comments</h2>
+          <% if (user) { %>
+            <form id="add-comment-form" method="POST" action="/artists/<%= artist._id %>/comments">
+              <label>Comment:</label>
+              <textarea name="content"></textarea>
+              <input type="submit" value="Add Comment">
+            </form>
+          <% } %>
+
+          <% if (artist.comments.length) { %>
+            <table>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Date</th>
+                  <th>Comment</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
                 <% artist.comments.forEach(function(c) { %>
-                    <div id="comments">
-                        <h3> <img class="avatar" alt="avatar" src="<%= c.userAvatar %>" width="15px" height="15px"> <%= c.userName %> </h3>
-                        <h4> <%=c.content%> </h4>
-                        <p> Rating: <%=c.rating%> </p>
-                        <% if (user && user._id.equals(c.user)) { %>
-                        <form action="/comments/<%= c._id %>?_method=DELETE" method="POST">
-                            <button type="submit">X</button>
-                        </form>
-                        <% } %>
-                    </div>
-                <% }) %>
-        </body>
+                  <tr>
+                    <td class="review-user"><img src="<%= c.userAvatar %>"><%= c.userName %></td>
+                    <td><%= c.createdAt.toLocaleDateString() %></td>
+                    <td><%= c.content %></td>
+                  </tr>
+                <% }); %>
+                <tr>
+                  <td colspan="3"></td>
+                  <td><strong><%= (total / artist.comments.length).toFixed(1) %></strong></td>
+                </tr>
+              </tbody>
+            </table>
+          <% } else { %>
+            <h5>No Comments Yet</h5>
+          <% } %>
+
+
     </main>
 
 
